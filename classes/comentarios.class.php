@@ -13,9 +13,9 @@ class Comentarios{
 		return $comentarios;
 	}
 
-	public function getById($id){
+	public function getByNoticiaIdAll($id){
 		$banco = new Database();
-		$consulta = $banco->db->prepare("SELECT * FROM comentarios WHERE id_comentario=?");
+		$consulta = $banco->db->prepare("SELECT * FROM comentarios WHERE id_noticia=?");
 		$consulta->execute(array($id));
 
 		return $resultado = $consulta->fetch();	

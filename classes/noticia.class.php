@@ -19,7 +19,7 @@ class Noticia{
 		$consulta->execute(array($id));
 
 		return $resultado = $consulta->fetch();	
-	}
+	}	
 }
 
 ?>

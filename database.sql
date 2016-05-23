@@ -12,6 +12,7 @@ CREATE TABLE noticia(
   data DATE NOT NULL,
   gravata VARCHAR(255) NOT NULL,
   conteudo VARCHAR(2048) NOT NULL,
+  link VARCHAR(255) NOT NULL,
   PRIMARY KEY(id_noticia),
   FOREIGN KEY (id_portal) REFERENCES portal(id_portal)
 );

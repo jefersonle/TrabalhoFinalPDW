@@ -70,17 +70,21 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         </div>
 
                         <table cellpadding="0" cellspacing="0" class="table_1">
-                            <tr>
-                                
+                            <tr>                                
                                 <th>Nome</th>
                                 <th>Site</th>
                                 <th>Email</th>
+                                <th>Opções</th>
                             </tr>
                             <?php foreach($portais as $portal):?>
                             <tr class="last_row">                                
                                 <td><?=$portal['nm_portal']?></td>
                                 <td><?=$portal['site']?></td>
-                                <td class="last_cell"><?=$portal['email']?></td>
+                                <td><?=$portal['email']?></td>
+                                <td class="last_cell">
+                                    <a href="update_portais.php?id=<?=$portal['id_portal']?>">Editar | </a>
+                                    <a href="delete_portais.php?id=<?=$portal['id_portal']?>">Excluir</a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                         </table>

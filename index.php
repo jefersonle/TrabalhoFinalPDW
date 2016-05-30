@@ -1,4 +1,12 @@
-<?php include 'inc/head.inc.php'; // inclusao do css e js  ?>
+<?php 
+include 'inc/head.inc.php'; // inclusao do css e js 
+include 'classes/noticia.class.php';
+
+$noticia = new Noticia();
+
+$noticias = $noticia->getAll();
+
+ ?>
 
 <body>
 	<div class="wrapper sticky_footer">
@@ -72,134 +80,59 @@
                         <div class="line_2" style="margin:34px 0px 28px;"></div>
                         
                         <div class="block_home_col_1">
+                        	<?php foreach ($noticias as $not): ?>
                         	<div class="block_home_post">
 								<div class="pic">
-									<a href="news_post.html" class="w_hover">
-										<img src="images/pic_home_news_1.jpg" alt="">
+									<a href="noticia.php?id=<?=$not['id_noticia']?>" class="w_hover">
+										<img src="imgnoticias/<?=$not['id_noticia']?>.jpg" width="70" height="50" alt="">
 										<span></span>
 									</a>
 								</div>
                                         
 								<div class="text">
-									<p class="title"><a href="news_post.html">There are many variations of of available, but the majority.</a></p>
-									<div class="date"><p>11 July, 2012</p></div>
+									<p class="title"><a href="noticia.php?id=<?=$not['id_noticia']?>"><?=$not['gravata']?>...</a></p>
+									<div class="date"><p><?=$not['data']?></p></div>
 								</div>
 							</div>
                             <div class="line_3" style="margin:14px 0px 17px;"></div>
-                            
-                            <div class="block_home_post">
-								<div class="pic">
-									<a href="news_post.html" class="w_hover">
-										<img src="images/pic_home_news_2.jpg" alt="">
-										<span></span>
-									</a>
-								</div>
-                                        
-								<div class="text">
-									<p class="title"><a href="news_post.html">Variations of of available, but the majority have suffered.</a></p>
-									<div class="date"><p>11 July, 2012</p></div>
-								</div>
-							</div>
-                            <div class="line_3" style="margin:14px 0px 17px;"></div>
-                            
-                            <div class="block_home_post">
-								<div class="pic">
-									<a href="news_post.html" class="w_hover">
-										<img src="images/pic_home_news_3.jpg" alt="">
-										<span></span>
-									</a>
-								</div>
-                                        
-								<div class="text">
-									<p class="title"><a href="news_post.html">Majority alteration in some form, by injected humour.</a></p>
-									<div class="date"><p>11 July, 2012</p></div>
-								</div>
-							</div>
+                        <?php endforeach; ?>             
                             
                         </div>
                         
                         <div class="block_home_col_2">
                         	<div class="line_3 first" style="margin:14px 0px 17px;"></div>
-                            <div class="block_home_post">
-								<div class="pic">
-									<a href="news_post.html" class="w_hover">
-										<img src="images/pic_home_news_4.jpg" alt="">
-										<span></span>
-									</a>
+	                            <?php foreach ($noticias as $not): ?>
+	                        	<div class="block_home_post">
+									<div class="pic">
+										<a href="news_post.html" class="w_hover">
+											<img src="images/pic_home_news_1.jpg" alt="">
+											<span></span>
+										</a>
+									</div>
+	                                        
+									<div class="text">
+										<p class="title"><a href="news_post.html">There are many variations of of available, but the majority.</a></p>
+										<div class="date"><p>11 July, 2012</p></div>
+									</div>
 								</div>
-                                        
-								<div class="text">
-									<p class="title"><a href="news_post.html">Many variations of of available, but the majority.</a></p>
-									<div class="date"><p>11 July, 2012</p></div>
-								</div>
-							</div>
-                            <div class="line_3" style="margin:14px 0px 17px;"></div>
-                            
-                            <div class="block_home_post">
-								<div class="pic">
-									<a href="news_post.html" class="w_hover">
-										<img src="images/pic_home_news_5.jpg" alt="">
-										<span></span>
-									</a>
-								</div>
-                                        
-								<div class="text">
-									<p class="title"><a href="news_post.html">Readable content of a page when looking readable content.</a></p>
-									<div class="date"><p>11 July, 2012</p></div>
-								</div>
-							</div>
-                            <div class="line_3" style="margin:14px 0px 17px;"></div>
-                            
-                            <div class="block_home_post">
-								<div class="pic">
-									<a href="news_post.html" class="w_hover">
-										<img src="images/pic_home_news_6.jpg" alt="">
-										<span></span>
-									</a>
-								</div>
-                                        
-								<div class="text">
-									<p class="title"><a href="news_post.html">Randomised words which don't look even slightly believable.</a></p>
-									<div class="date"><p>11 July, 2012</p></div>
-								</div>
-							</div>
+	                            <div class="line_3" style="margin:14px 0px 17px;"></div>
+	                        <?php endforeach; ?> 
                             
                         </div>
-                        <div class="clearboth"></div>
                         
-                        <div class="line_3" style="margin:14px 0px 13px;"></div>
-                        <a href="main_news.html" class="lnk_all_news fl">Todas as Notícias</a>
-                        <div class="clearboth"></div>
                     </div>
 
-                    <div class="sidebar">
-                    	<div class="block_subscribes_sidebar">
-                        	<div class="service">
-                            	<a href="#" class="rss">
-                                	<span class="num">11 234</span>
-                                    <span class="people">Subscribers</span>
-                                </a>
-                            </div>
+                    <div class="sidebar">                    	
+                       <div class="block_newsletter">
+                        	<h4>Feed RSS</h4>                            
                             
-                            <div class="service">
-                            	<a href="#" class="tw">
-                                	<span class="num">781</span>
-                                    <span class="people">Followers</span>
-                                </a>
-                            </div>
+                                <button href="feed-rss.php" class="button">Assinar</button>
                             
-                            <div class="service">
-                            	<a href="#" class="fb">
-                                	<span class="num">341</span>
-                                    <span class="people">Subscribers</span>
-                                </a>
-                            </div>
                         </div>
-                        
                       <div class="separator" style="height:31px;"></div>
                         
                         <div class="block_popular_posts">
-                        	<h4>Popular Posts</h4>
+                        	<h4>Todos os Destaques</h4>
                             
                         	<div class="article">
 								<div class="pic">
@@ -248,16 +181,7 @@
                         </div>
                         
                         <div class="separator" style="height:31px;"></div>
-                        <div class="block_newsletter">
-                        	<h4>Newsletter - RSS</h4>
-                            
-                            <form action="#">
-                            	<div class="field"><input type="text" class="w_def_text" title="Digite seu email aqui"></div>
-                                <input type="submit" class="button" value="Inscrever">
-                                
-                                <div class="clearboth"></div>
-                            </form>
-                        </div>
+                       
                         
                     </div>
                     

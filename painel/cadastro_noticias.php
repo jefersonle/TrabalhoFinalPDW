@@ -3,6 +3,7 @@ include '../inc/config.php'; // inclusao das configuracoes
 include '../inc/head.pages.inc.php'; // inclusao do css e js
 include "../classes/noticia.class.php";
 include "../classes/portal.class.php";
+include "../classes/imagem.class.php";
 
 $portal = new Portal();
 $portais = $portal->getAll();
@@ -11,15 +12,24 @@ $noticia = new Noticia();
 $noticias = $noticia->getAll();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $site = $_POST['site'];
-    if($nome != "" && $email != "" && $site != ""){
-        
-        $portal->nmPortal = $nome;
-        $portal->site = $site;
-        $portal->email = $email;
-        $portal->save();
+    $id_portal = $_POST['portal'];
+    $titulo = $_POST['titulo'];
+    $conteudo = $_POST['conteudo'];
+    $data = $_POST['data'];
+    $link = $_POST['link'];
+    
+    if($id_portal !="" && $titulo !="" && $conteudo !="" && $data !="" && $link !=""){
+        $noticia->idPortal = $id_portal;
+        $noticia->titulo = $titulo;
+        $noticia->data = $data;
+        $noticia->conteudo = $conteudo;
+        $noticia->link = $link;
+        $noticia->gravata = substr($conteudo, 0, 50);
+
+        $res = $noticia->save();
+
+
+        move_uploaded_file($_FILES['imagem']['tmp_name'], "../imgnoticias/".$res.".jpg");
 
         $msg = "Cadastro efetuado com sucesso";
 
@@ -103,14 +113,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <th>Gravata</th>
                                 <th>Conteúdo</th>
                                 <th>Link</th>
+                                <th>Opções</th>
                             </tr>
                             <?php foreach ($noticias as $noticia): ?>
                             <tr class="last_row">
-                                <td><?=$noticia['id_portal']?></td>
+                                <td><?php echo Portal::getName($noticia['id_portal']) ?></td>
                                 <td><?=$noticia['data']?></td>
                                 <td><?=$noticia['titulo']?></td>
                                 <td><?=$noticia['gravata']?></td>
                                 <td><?=$noticia['conteudo']?></td>
+                                <td><?=$noticia['link']?></td>
+                                <td class="last_cell">
+                                    <a href="update_noticias.php?id=<?=$noticia['id_noticia']?>">Editar | </a>
+                                    <a href="delete_noticias.php?id=<?=$noticia['id_noticia']?>">Excluir</a>
+                                </td>
                                 
                             </tr>
                         <?php endforeach; ?>

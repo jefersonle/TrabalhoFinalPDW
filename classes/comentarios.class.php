@@ -1,6 +1,6 @@
 <?php 
 
-include 'database.class.php';
+include_once 'database.class.php';
 
 class Comentarios{
 	private $idComentario = "";
@@ -17,12 +17,15 @@ class Comentarios{
 		return $comentarios;
 	}
 
-	public function getByNoticiaIdAll($id){
+	public static function getByNoticiaIdAll($id){
 		$banco = new Database();
-		$consulta = $banco->db->prepare("SELECT * FROM comentarios WHERE id_noticia=?");
+		$consulta = $banco->db->prepare("SELECT * FROM comentarios WHERE id_noticia=? ORDER BY id_comentario");
 		$consulta->execute(array($id));
-
-		return $resultado = $consulta->fetch();	
+		$comentarios = array();
+		while($resultado = $consulta->fetch()){
+			$comentarios[] = $resultado;
+		}			
+		return $comentarios;	
 	}
 
 	public function save(){

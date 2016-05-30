@@ -11,7 +11,7 @@ class Portal{
 
 	public function getAll(){
 		$banco = new Database();
-		$consulta = $banco->db->query("SELECT * FROM portal");
+		$consulta = $banco->db->query("SELECT * FROM portal ORDER BY nm_portal");
 		while($resultado = $consulta->fetch()){
 			$portais[] = $resultado;
 		}			
@@ -55,6 +55,23 @@ class Portal{
 		return $resultado = $consulta->fetch();
 		
 		
+	}
+
+	public function delete($id){
+		$banco = new Database();
+		$consulta = $banco->db->prepare("DELETE FROM portal WHERE id_portal=?");
+		$consulta->execute(array($id));
+
+		return true;		
+	}
+
+	public static function getName($id){
+		$banco = new Database();
+		$consulta = $banco->db->prepare("SELECT nm_portal FROM portal WHERE id_portal=?");
+		$consulta->execute(array($id));
+		$resultado = $consulta->fetch();
+
+		return $resultado[0];
 	}
 }
 

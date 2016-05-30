@@ -1,4 +1,15 @@
-<?php include 'inc/head.inc.php'; // inclusao do css e js  ?>
+<?php 
+
+if (!isset($_GET['id'])) header('Location: index.php');
+
+include 'inc/head.inc.php'; // inclusao do css e js  
+include 'classes/noticia.class.php';
+include 'classes/comentarios.class.php';
+
+$noticia = new Noticia();
+$not = $noticia->getById($_GET['id']);
+$comentarios = Comentarios::getByNoticiaIdAll($_GET['id']);
+?>
 
 <body>
 	<div class="wrapper sticky_footer">
@@ -11,103 +22,70 @@
                         <div class="separator" style="height:30px;"></div>
                         
                         <article class="block_single_post">
-                        	<div class="f_pic"><a href="#"><img src="images/pic_blog_post_1.jpg" alt=""></a></div>
-                          <p class="title"><a href="#">Words which don't look even slightly.</a></p>
-                            <p class="subtitle">Many variations of passages of available, but the majority have suffered alteration in some form. Humour, or randomised words which don't look even slightly believable.</p>
+                        	<div class="f_pic"><a href="#"><img src="imgnoticias/<?=$not['id_noticia']?>.jpg" alt=""></a></div>
+                          <p class="title"><a href="#"><?=$not['titulo']?></a></p>
                             
                             <div class="info">
-                                <div class="date"><p>15 July, 2012</p></div>
-                                <div class="author"><p>By: <a href="#">John Doe</a></p></div>
-                                    
-                            	<div class="r_part">
-                                	<div class="category"><p>category: <a href="#">BUSINESS</a></p></div>
-                                    <a href="#" class="views">650</a>
-                                    <a href="#" class="comments">25</a>
-                                </div>
+                                <div class="date"><p><?=$not['data']?></p></div>                                   
+                            	
                             </div>
                             
                             <div class="content">
-                            	<p>There are many variations of passages of available, but the majority have suffered alteration in some form, by injected humour, or <b>randomised words which</b> don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the generators on the Internet tend to repeat predefined <a href="#" class="lnk_blue"><b>chunks as necessary</b></a>, making this the first true generator on the Internet. It uses a dictionary of over words, combined with a handful of model sentence structures, to generate which looks reasonable.</p>
-                                <p>Available, but the majority have suffered alteration.By injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. Established fact that a reader will be <a href="#" class="lnk_blue"><b>distracted by the readable</b></a> content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less.</p>
+                            	<p><?=$not['conteudo']?></p>
+                                <p><a href="<?=$not['link']?>">Visitar Página da Notícia</a></p>
                             </div>
 
-                        </article>
-                        
-                        <div class="block_post_tags">
-                        	<p>Tags: <a href="#">business,</a><a href="#">stock market</a></p>
-                        </div>
-
+                        </article>                    
+                      
                         <div class="line_2" style="margin:5px 0px 28px;"></div>
 
                         <div class="block_comments">
-                        	<h2>4 Comments</h2>
-                            
+                        	<h2>Comentários</h2>
+                            <?php if (count($comentarios)): foreach ($comentarios as $comentario):?>
                             <div class="comment">
                             	<div class="userpic"><a href="#"><img src="images/ava_default_1.jpg" alt=""></a></div>
                                 <div class="content">
-                                	<p class="name"><a href="#">John Doe</a></p>
-                                    <p class="info"><span class="date">Febr 16, 2012 at 4:43 pm</span><a href="#" class="control">Reply</a></p>
-                                    <p class="text">Established fact that a reader will be distracted by the readable content of a page. When looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using.</p>
+                                	<p class="name"><a href="#"><?=$comentario['email']?></a></p>
+                                    <p class="text"><?=$comentario['comentario']?></p>
                                 </div>
                                 <div class="clearboth"></div>
                                 <div class="line_3"></div>
-                            </div>
-                            
-                            <div class="comment">
-                            	<div class="userpic"><a href="#"><img src="images/ava_default_1.jpg" alt=""></a></div>
-                                <div class="content">
-                                	<p class="name"><a href="#">Sara Gordon</a></p>
-                                    <p class="info"><span class="date">Febr 16, 2012 at 4:43 pm</span><a href="#" class="control">Reply</a></p>
-                                    <p class="text">Distracted by the readable content of a page. When looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed.</p>
-                                </div>
-                                <div class="clearboth"></div>
-                                <div class="line_3"></div>
-                            </div>
+                            </div>  
+                            <?php endforeach; else: ?> 
+                            <p>Nenhum Comentário</p>
+                            <?php endif; ?>                        
 
                         </div>
                         
                         <div class="separator" style="height:30px;"></div>
                         
                         <div class="block_leave_reply">
-                        	<h3>Comentários</h3>
-                        	<p class="text">Seu e-mail não será publicado <span>*</span></p>
+                        	<h3>Deixe seu Comentário</h3>
                             
-                        	<form class="w_validation" action="#">
+                        	<form class="w_validation" action="add_comentario.php" method="POST">
                                 <p>E-mail<span>*</span></p>
-                            	<div class="field"><input type="text" class="req"></div>
+                            	<div class="field"><input type="email" name="email" class="req"></div>
                                 
                                 <p>Comentário</p>
-                                <div class="textarea"><textarea cols="1" rows="1"></textarea></div>
-                                
+                                <div class="textarea"><textarea name="comentario" cols="1" rows="1"></textarea></div>
+                                <input type="hidden" name="id_noticia" value="<?=$_GET['id']?>">
                                 <input type="submit" class="general_button" value="Comentar">
                             </form>
                         </div>
                         
                     </div>
                     
-                    <div class="sidebar">
-                    	<div class="block_subscribes_sidebar">
-                        	<div class="service">
-                            	<a href="#" class="rss">
-                                	<span class="num">11 234</span>
-                                    <span class="people">Subscribers</span>
-                                </a>
-                            </div>
+                    <div class="sidebar">       
+                        <div class="block_newsletter">
+                            <h4>Newsletter</h4>
                             
-                            <div class="service">
-                            	<a href="#" class="tw">
-                                	<span class="num">781</span>
-                                    <span class="people">Followers</span>
-                                </a>
-                            </div>
-                            
-                            <div class="service">
-                            	<a href="#" class="fb">
-                                	<span class="num">341</span>
-                                    <span class="people">Subscribers</span>
-                                </a>
-                            </div>
-                        </div>
+                            <form action="#">
+                                <div class="field"><input type="text" class="w_def_text" title="Enter Your Email Addres"></div>
+                                <input type="submit" class="button" value="Subscribe">
+                                
+                                <div class="clearboth"></div>
+                            </form>
+                        </div>             	
                         
                       <div class="separator" style="height:31px;"></div>
                         
@@ -180,16 +158,7 @@
                         
                         <div class="separator" style="height:31px;"></div>
                         
-                        <div class="block_newsletter">
-                        	<h4>Newsletter</h4>
-                            
-                            <form action="#">
-                            	<div class="field"><input type="text" class="w_def_text" title="Enter Your Email Addres"></div>
-                                <input type="submit" class="button" value="Subscribe">
-                                
-                                <div class="clearboth"></div>
-                            </form>
-                        </div>
+                        
                         
                     </div>
                     

@@ -19,8 +19,8 @@
                     </div>
 
                     <div class="block_search_top">
-                        <form action="#">
-                            <div class="field"><input type="text" class="w_def_text" title="Digite sua busca aqui"></div>
+                        <form action="../search.php" method="POST">
+                            <div class="field"><input type="text" name="word" class="w_def_text" title="Digite sua busca aqui"></div>
                             <input type="submit" class="button" value="Search">
 
                             <div class="clearboth"></div>

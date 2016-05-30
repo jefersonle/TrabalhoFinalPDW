@@ -3,7 +3,7 @@
     <div id="header">
         <section class="bottom">
             <div class="inner">
-                <div id="logo_top"><a href=""><img src="images/logo_top.png" alt="BusinessNews" title="BusinessNews"></a></div>
+                <div id="logo_top"><a href="index.php"><img src="images/logo_top.png" alt="BusinessNews" title="BusinessNews"></a></div>
 
                 <div class="block_today_date">
                     <div class="num"><p id="num_top"></p></div>
@@ -19,9 +19,9 @@
                     </div>
 
                     <div class="block_search_top">
-                        <form action="#">
-                            <div class="field"><input type="text" class="w_def_text" title="Digite sua busca aqui"></div>
-                            <input type="submit" class="button" value="Search">
+                        <form action="search.php" method="POST">
+                            <div class="field"><input type="text" class="w_def_text" name="word" title="Digite sua busca aqui"></div>
+                            <input type="submit" class="button" value="Buscar">
 
                             <div class="clearboth"></div>
                         </form>
@@ -36,7 +36,7 @@
             <div class="inner">
                 <nav class="main_menu">
                     <ul>
-                        <li class="current_page_item"><a href="">Home</a></li>
+                        <li class="current_page_item"><a href="index.php">Home</a></li>
                         <li><a href="#">Administração</a>
                             <ul>
                                 <li><a href="painel/cadastro_portais.php">Cadastro de Portais</a></li>

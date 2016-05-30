@@ -1,6 +1,43 @@
 <?php
-    include '../inc/config.php'; // inclusao das configuracoes
-    include '../inc/head.pages.inc.php'; // inclusao do css e js
+include '../inc/config.php'; // inclusao das configuracoes
+include '../inc/head.pages.inc.php'; // inclusao do css e js
+include '../classes/noticia.class.php';
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    
+  move_uploaded_file($_FILES['arquivo']['tmp_name'], "xml/noticias.xml");
+
+  $doc = new DOMDocument();
+  $doc->preserveWhiteSpace=false;
+  $doc->formatOutput=true;
+  $doc->load('xml/noticias.xml');
+
+  $noticias = $doc->getElementsByTagName( "noticia" );
+  foreach( $noticias as $noticia )
+  {
+    $not = new Noticia();
+
+    $not->idPortal = $noticia->getElementsByTagName( "idPortal" )->item(0)->nodeValue;
+
+    $not->titulo = $noticia->getElementsByTagName( "titulo" )->item(0)->nodeValue;
+
+    $not->data = $noticia->getElementsByTagName( "data" )->item(0)->nodeValue;
+
+    $not->conteudo = $noticia->getElementsByTagName( "conteudo" )->item(0)->nodeValue;
+
+    $not->gravata = substr($noticia->getElementsByTagName( "conteudo" )->item(0)->nodeValue, 0, 50);
+
+    $not->link = $noticia->getElementsByTagName( "link" )->item(0)->nodeValue;
+
+    $not->save();
+
+  }
+
+  $msg = "Cadastro efetuado com sucesso!";
+  
+}else{
+  $msg = "";
+}
 ?>
     <body>
         <div class="wrapper sticky_footer">
@@ -13,16 +50,17 @@
                             <div class="separator" style="height:39px;"></div>
 
                             <div class="block_registration">
-                                <form action="#"  method="post" enctype="multipart/form-data" class="w_validation">
+                                <form action=""  method="post" enctype="multipart/form-data" class="w_validation">
                                     <div class="col_1">
                                         <div class="label"><p>Arquivo XML<span>*</span>: </p></div>
-                                        <div class="field"><input type="file" class="req"></div>
+                                        <div class="field"><input type="file" name="arquivo" class="req"></div>
                                         <div class="clearboth"></div>
                                         <div class="separator" style="height:12px;"></div>
 
                                     </div>
                                     <p class="info_text"><input type="submit" class="general_button" value="Enviar"></p>
                                 </form>
+                                <p><?=$msg?></p>
                             </div>
 
                             <div class="line_3" style="margin:42px 0px 0px;"></div>

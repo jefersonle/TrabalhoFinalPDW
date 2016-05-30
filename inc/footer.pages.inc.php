@@ -12,7 +12,7 @@
 
         <section class="bottom">
             <div class="inner">
-                <div class="block_copyrights"><p>&copy; 2011 Business Press. All rights reserved.</p></div>
+                <div class="block_copyrights"><p>&copy; 2016 UNOPAR - TSI - 5º PERÍODO. All rights reserved.</p></div>
             </div>
         </section>
     </div>

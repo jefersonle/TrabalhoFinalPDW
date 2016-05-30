@@ -1,35 +1,47 @@
 <?php
 // Observacoes:
 // Adicionar a extensao php_soap no php.ini
-include 'class/portal.class.php';
+include '../classes/noticia.class.php';
+include '../classes/portal.class.php';
 
 //criacao de uma instancia do servidor (coloque o endereco na sua maquina local)
-$server = new SoapServer(null, array('uri' => 'http://localhost/tormen/trabalhofinal'));  // ex.: http://localhost/soap/
+$server = new SoapServer(null, array('uri' => 'http://localhost/PDW/webservice/'));  // ex.: http://localhost/soap/
 
 
 
 //definicao dos métodos disponíveis para uso do servico ( vai retornar apenas a frase Hello World + parametro que receber + ! )
 
 	  		function getSearch($palavraChave){
-	  			return $resultado;
+	  			$noticia = new Noticia();
+	  			$noticias = $noticia->search($palavraChave);
+
+	  			return $noticias;
 	  		}
 	  		function getByPortalId($id){
-	  			$portal = new Portal();
-	  			$resultado = $portal->getById($id);
+	  			$noticia = new Noticia();
+	  			$resultado = $noticia->getByPortalId($id);
+	  			
 	  			return $resultado;
 	  		}
 	  		function getByNoticiaId($id){
-	  			return $resultado;
-	  		}
-	  		function getAllNoticias(){
+	  			$noticia = new Noticia();
+	  			$resultado = $noticia->getById($id);
 
 	  			return $resultado;
 	  		}
+	  		function getAllNoticias(){
+	  			$noticia = new Noticia();
+	  			$noticias = $noticia->getAll();
+
+	  			return $noticias;
+	  		}
 	  		function getAllPortais(){
 	  			$portal = new Portal();
-	  			$resultado = $portal->getAll();
-	  			return $resultado;
+	  			$portais = $portal->getAll();
+	  			return $portais;
 	  		}
+
+	  		
 
 //registro do servico na instania
 $server->addFunction("getSearch");

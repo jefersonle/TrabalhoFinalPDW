@@ -57,9 +57,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <div class="block_registration">
                                 <form action="" method="POST" class="w_validation" enctype="multipart/form-data">
                                     <div class="col_1">
-                                        <div class="label"><p>Portal:</p></div>
-                                        <div class="field">
-                                            <select name="portal" class="req">
+                                        <div class="form-group">
+                                            <label for="sel1">Portal:</label>
+                                            <select name="portal" class="form-control" id="sel1">
                                                 <?php foreach($portais as $portal): ?>
                                                 <option value="<?=$portal['id_portal']?>"
                                                     <?php if($portal['id_portal'] == $noticia->idPortal) echo "selected"?>
@@ -67,43 +67,40 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                             <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
 
-                                        <div class="label"><p>Título<span>*</span>: </p></div>
-                                        <div class="field"><input name="titulo" type="text" class="req" value="<?=$noticia->titulo?>"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Título<span>*</span>: </p></label>
+                                            <input type="text" name="titulo" class="form-control" value="<?=$noticia->titulo?>" id="usr">
+                                        </div>
 
-                                        <div class="label"><p>Conteúdo<span>*</span>: </p></div>
-                                        <textarea name="conteudo" rows="5" cols="40"><?=$noticia->conteudo?></textarea>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Conteúdo<span>*</span>: </p></label>
+                                            <textarea class="form-control" name="conteudo" value="" rows="5" id="comment"><?=$noticia->conteudo?></textarea>
+                                        </div>
 
                                     </div>
 
                                     <div class="col_2">
-                                        <div class="label"><p>Data<span>*</span>:</p></div>
-                                        <div class="field"><input type="date" name="data" class="req" value="<?=$noticia->data?>"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Data<span>*</span>: </p></label>
+                                            <input type="date" name="data" class="form-control" value="<?=$noticia->data?>" id="usr">
+                                        </div>
 
-                                        <div class="label"><p>Link<span>*</span>:</p></div>
-                                        <div class="field"><input type="url" name="link" class="req" value="<?=$noticia->link?>"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Link<span>*</span>: </p></label>
+                                            <input type="url" name="link" class="form-control" value="<?=$noticia->link?>" id="usr">
+                                        </div>
 
-                                        <div class="label"><p>Imagem<span>*</span>:</p></div>
-                                        <div class="field"><input type="file" name="imagem"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Imagem<span>*</span>: </p></label>
+                                            <input type="file" name="imagem" class="form-control" id="usr">
+                                        </div>
+
                                     </div>
 
-
-
-                                    <div class="clearboth"></div>
-                                    <div class="separator" style="height:32px;"></div>
-                                    <p class="info_text"><input type="submit" class="general_button" value="Atualizar"></p>
+                                    <div class="col-md-2 col-md-offset-5" >
+                                        <p class="info_text"><input type="submit" class="general_button" value="Atualizar"></p>
+                                    </div>
                                 </form>
                             </div>
 

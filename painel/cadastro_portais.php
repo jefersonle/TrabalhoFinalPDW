@@ -41,28 +41,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <div class="block_registration">
                                 <form action="" method="POST" class="w_validation">
                                     <div class="col_1">
-                                        <div class="label"><p>Nome<span>*</span>:</p></div>
-                                        <div class="field"><input required="required" type="text" name="nome" class="req"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:14px;"></div>
 
-                                        <div class="label"><p>E-mail<span>*</span>:</p></div>
-                                        <div class="field"><input required="required" type="email" name="email" class="req"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Nome<span>*</span>: </p></label>
+                                            <input required="required" type="text" name="nome" class="form-control" id="usr">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="usr"><p>E-mail<span>*</span>: </p></label>
+                                            <input required="required" type="email" name="email" class="form-control" id="usr">
+                                        </div>
+
                                     </div>
 
                                     <div class="col_2">
-                                        <div class="label"><p>Site<span>*</span>:</p></div>
-                                        <div class="field"><input required="required" type="text" name="site"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:14px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Site<span>*</span>: </p></label>
+                                            <input required="required" type="text" name="site" class="form-control" id="usr">
+                                        </div>
+
                                     </div>
 
-                                    <div class="clearboth"></div>
-                                    <div class="separator" style="height:32px;"></div>
-                                    <p class="info_text"><?=$msg?></p>
-                                    <p class="info_text"><input type="submit" class="general_button" value="Cadastrar"></p>
+                                    <div class="col-md-2 col-md-offset-5" >
+                                        <p class="info_text"><?=$msg?></p>
+                                        <p class="info_text"><input type="submit" class="general_button" value="Cadastrar"></p>
+                                    </div>
+                                    
                                 </form>
                             </div>
 

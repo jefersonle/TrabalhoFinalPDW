@@ -54,51 +54,47 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <div class="block_registration">
                                 <form action="" method="POST" class="w_validation" enctype="multipart/form-data">
                                     <div class="col_1">
-                                        <div class="label"><p>Portal:</p></div>
-                                        <div class="field">
-                                            <select name="portal" class="req">
+                                        <div class="form-group">
+                                            <label for="sel1">Portal:</label>
+                                            <select name="portal" class="form-control" id="sel1">
                                                 <?php foreach($portais as $portal): ?>
                                                 <option value="<?=$portal['id_portal']?>"><?=$portal['nm_portal']?></option>
                                             <?php endforeach; ?>
                                             </select>
                                         </div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
 
-                                        <div class="label"><p>Título<span>*</span>: </p></div>
-                                        <div class="field"><input name="titulo" type="text" class="req"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Título<span>*</span>: </p></label>
+                                            <input type="text" name="titulo" class="form-control" id="usr">
+                                        </div>
 
-                                        <div class="label"><p>Conteúdo<span>*</span>: </p></div>
-                                        <textarea name="conteudo" rows="5" cols="40" value=""></textarea>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="comment"><p>Conteúdo<span>*</span>: </p></label>
+                                            <textarea class="form-control" name="conteudo" value="" rows="5" id="comment"></textarea>
+                                        </div>
 
                                     </div>
 
                                     <div class="col_2">
-                                        <div class="label"><p>Data<span>*</span>:</p></div>
-                                        <div class="field"><input type="date" name="data" class="req"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Data<span>*</span>: </p></label>
+                                            <input type="date" name="data" class="form-control" id="usr">
+                                        </div>
 
-                                        <div class="label"><p>Link<span>*</span>:</p></div>
-                                        <div class="field"><input type="url" name="link" class="req"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Link<span>*</span>: </p></label>
+                                            <input type="url" name="link" class="form-control" id="usr">
+                                        </div>
 
-                                        <div class="label"><p>Imagem<span>*</span>:</p></div>
-                                        <div class="field"><input type="file" name="imagem" class="req"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+                                        <div class="form-group">
+                                            <label for="usr"><p>Imagem<span>*</span>: </p></label>
+                                            <input type="file" name="imagem" class="form-control" id="usr">
+                                        </div>
+
                                     </div>
 
+                                    <div class="col-md-2 col-md-offset-5" ><p class="info_text"><input type="submit" class="general_button" value="Cadastrar"></p></div>
 
-
-                                    <div class="clearboth"></div>
-                                    <div class="separator" style="height:32px;"></div>
-                                    <p class="info_text"><input type="submit" class="general_button" value="Cadastrar"></p>
                                 </form>
                             </div>
 

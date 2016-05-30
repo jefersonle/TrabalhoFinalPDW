@@ -52,15 +52,21 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             <div class="block_registration">
                                 <form action=""  method="post" enctype="multipart/form-data" class="w_validation">
                                     <div class="col_1">
-                                        <div class="label"><p>Arquivo XML<span>*</span>: </p></div>
-                                        <div class="field"><input type="file" name="arquivo" class="req"></div>
-                                        <div class="clearboth"></div>
-                                        <div class="separator" style="height:12px;"></div>
+
+                                        <div class="form-group">
+                                            <label for="usr"><p>Arquivo XML<span>*</span>: </p></label>
+                                            <input type="file" name="arquivo" class="form-control" id="usr">
+                                        </div>
 
                                     </div>
-                                    <p class="info_text"><input type="submit" class="general_button" value="Enviar"></p>
+                                    <div class="col-md-2 col-md-offset-5" >
+                                        <p class="info_text"><input type="submit" class="general_button" value="Enviar"></p>
+                                    </div>
+
                                 </form>
-                                <p><?=$msg?></p>
+                                <div class="col-md-2 col-md-offset-5" >
+                                    <p><?=$msg?></p>
+                                </div>
                             </div>
 
                             <div class="line_3" style="margin:42px 0px 0px;"></div>

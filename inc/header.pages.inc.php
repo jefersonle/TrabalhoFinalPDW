@@ -13,19 +13,17 @@
                     </div>
                 </div>
 
+
                 <div class="fr">
                     <div class="block_languages">
                         <div class="clearboth"></div>
                     </div>
 
-                    <div class="block_search_top">
-                        <form action="../search.php" method="POST">
-                            <div class="field"><input type="text" name="word" class="w_def_text" title="Digite sua busca aqui"></div>
-                            <input type="submit" class="button" value="Search">
-
-                            <div class="clearboth"></div>
-                        </form>
-                    </div>
+                    <form role="form" action="../search.php" method="POST">
+                        <div class="form-group col-sm-12">
+                            <input type="text" class="form-control" name="word" placeholder="Digite sua busca aqui">
+                        </div>
+                    </form>
                 </div>
 
                 <div class="clearboth"></div>

@@ -11,6 +11,7 @@ class Comentarios{
 	public function getAll(){
 		$banco = new Database();
 		$consulta = $banco->db->query("SELECT * FROM comentarios");
+		$comentarios = array();
 		while($resultado = $consulta->fetch()){
 			$comentarios[] = $resultado;
 		}			

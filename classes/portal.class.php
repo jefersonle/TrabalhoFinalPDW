@@ -12,6 +12,7 @@ class Portal{
 	public function getAll(){
 		$banco = new Database();
 		$consulta = $banco->db->query("SELECT * FROM portal ORDER BY nm_portal");
+		$portais = array();
 		while($resultado = $consulta->fetch()){
 			$portais[] = $resultado;
 		}			

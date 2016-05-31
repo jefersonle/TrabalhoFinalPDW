@@ -32,6 +32,7 @@ class Imagem{
 		$banco = new Database();
 		$consulta = $banco->db->prepare("SELECT * FROM imagens WHERE id_noticia=?");
 		$consulta->execute(array($idNoticia));
+		$imagens = array();
 		while ($resultado = $consulta->fetch()) {
 			$imagens[] = $resultado;
 		}

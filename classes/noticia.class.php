@@ -14,6 +14,7 @@ class Noticia{
 	public function getAll(){
 		$banco = new Database();
 		$consulta = $banco->db->query("SELECT * FROM noticia ORDER BY id_noticia DESC");
+		$noticias = array();
 		while($resultado = $consulta->fetch()) {
 			$noticias[] = $resultado;
 		}

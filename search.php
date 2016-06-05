@@ -1,12 +1,15 @@
 <?php 
-
+//Verifica se a requisição é feita via post, se não redireciona para index
 if ($_SERVER['REQUEST_METHOD'] != 'POST') header('Location: index.php');
 
-include 'inc/head.inc.php'; // inclusao do css e js 
+//Inclui cabeçalho
+include 'inc/head.inc.php';
+//Inclui classe notícia
 include 'classes/noticia.class.php';
 
+//Instancia notícia
 $noticia = new Noticia();
-
+//Cria array com notícias retornadas na busca
 $noticias = $noticia->search($_POST['word']);
 
  ?>
@@ -21,6 +24,7 @@ $noticias = $noticia->search($_POST['word']);
                 	<div class="main_content">
                         
                         <div class="block_home_col_1">
+                        	<!-- Percorre array de notícias e exibe cada uma delas -->
                         	<?php  if (count($noticias)): foreach ($noticias as $not): ?>
                         	<div class="block_home_post">
 								<div class="pic">
@@ -40,28 +44,8 @@ $noticias = $noticia->search($_POST['word']);
                         <h2>Nenhum Resultado Encontrado.</h2> 
                         <?php endif; ?>          
                             
-                        </div>
-                        
-                        <!-- <div class="block_home_col_2">
-                        	<div class="line_3 first" style="margin:14px 0px 17px;"></div>
-	                            <?php foreach ($noticias as $not): ?>
-	                        	<div class="block_home_post">
-									<div class="pic">
-										<a href="news_post.html" class="w_hover">
-											<img src="images/pic_home_news_1.jpg" alt="">
-											<span></span>
-										</a>
-									</div>
-	                                        
-									<div class="text">
-										<p class="title"><a href="news_post.html">There are many variations of of available, but the majority.</a></p>
-										<div class="date"><p>11 July, 2012</p></div>
-									</div>
-								</div>
-	                            <div class="line_3" style="margin:14px 0px 17px;"></div>
-	                        <?php endforeach; ?>  -->
-                            
-                        </div>
+                        </div>                    
+                      
                         
                     </div>
 

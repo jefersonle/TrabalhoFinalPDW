@@ -1,9 +1,11 @@
 <?php 
+//Inclui classe noticia e cabeçalho
 include 'inc/head.inc.php'; // inclusao do css e js 
 include 'classes/noticia.class.php';
 
+//Instancia notícia
 $noticia = new Noticia();
-
+//Pega todas as notícias no banco
 $noticias = $noticia->getAll();
 
  ?>
@@ -78,7 +80,7 @@ $noticias = $noticia->getAll();
                         </div>
                         
                         <div class="line_2" style="margin:34px 0px 28px;"></div>
-
+                        <!-- Percorre array de notícias e exibe uma por uma -->
                         <?php foreach ($noticias as $not): ?>
                         <div class="block_home_post">
                             <div class="pic">

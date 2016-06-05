@@ -1,13 +1,18 @@
 <?php 
-
+//Verifica se existe o id da notícia, caso não exista redireciona para index
 if (!isset($_GET['id'])) header('Location: index.php');
-
-include 'inc/head.inc.php'; // inclusao do css e js  
+//Inclui cabeçalho
+include 'inc/head.inc.php'; 
+//Inclui classes notícia e comentários
 include 'classes/noticia.class.php';
 include 'classes/comentarios.class.php';
 
+//Instancia noticia
 $noticia = new Noticia();
+//Pega informações da notícia do banco passando seu id pego via GET
 $not = $noticia->getById($_GET['id']);
+
+//Cria array com todos os comentários da notícia
 $comentarios = Comentarios::getByNoticiaIdAll($_GET['id']);
 ?>
 
@@ -22,16 +27,21 @@ $comentarios = Comentarios::getByNoticiaIdAll($_GET['id']);
                         <div class="separator" style="height:30px;"></div>
                         
                         <article class="block_single_post">
+                            <!-- Exibe imagem da noticia -->
                         	<div class="f_pic"><a href="#"><img src="imgnoticias/<?=$not['id_noticia']?>.jpg" alt=""></a></div>
+                         <!-- Exibe título da notícia -->
                           <p class="title"><a href="#"><?=$not['titulo']?></a></p>
                             
                             <div class="info">
+                                <!-- Exibe data da notícia -->
                                 <div class="date"><p><?=$not['data']?></p></div>                                   
                             	
                             </div>
                             
                             <div class="content">
+                                <!-- Exibe conteúdo da notícia -->
                             	<p><?=$not['conteudo']?></p>
+                                <!-- Exibe link da notícia -->
                                 <p><a href="<?=$not['link']?>">Visitar Página da Notícia</a></p>
                             </div>
 
@@ -41,11 +51,14 @@ $comentarios = Comentarios::getByNoticiaIdAll($_GET['id']);
 
                         <div class="block_comments">
                         	<h2>Comentários</h2>
+                            <!-- Percorre array de comentários e exibe cada um deles -->
                             <?php if (count($comentarios)): foreach ($comentarios as $comentario):?>
                             <div class="comment">
                             	<div class="userpic"><a href="#"><img src="images/ava_default_1.jpg" alt=""></a></div>
                                 <div class="content">
+                                    <!-- Exibe email do comentário -->
                                 	<p class="name"><a href="#"><?=$comentario['email']?></a></p>
+                                    <!-- Exibe Comentário -->
                                     <p class="text"><?=$comentario['comentario']?></p>
                                 </div>
                                 <div class="clearboth"></div>

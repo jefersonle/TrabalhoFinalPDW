@@ -1,14 +1,16 @@
 <?php 
-
+//Inclui classe para conexão ao banco
 include_once 'database.class.php';
 
+//Cria classe Portal
 class Portal{
+	//Define variáveis da classe
 	private $idPortal = "";
 	public $nmPortal = "";
 	public $site = "";
 	public $email = "";
 
-
+	//Cria Método que retorna todos os portais
 	public function getAll(){
 		$banco = new Database();
 		$consulta = $banco->db->query("SELECT * FROM portal ORDER BY nm_portal");
@@ -18,7 +20,7 @@ class Portal{
 		}			
 		return $portais;
 	}
-
+	//Método que retorna portal pelo seu id no banco
 	public function getById($id){
 		$banco = new Database();
 		$consulta = $banco->db->prepare("SELECT * FROM portal WHERE id_portal=?");
@@ -26,7 +28,7 @@ class Portal{
 
 		return $resultado = $consulta->fetch();	
 	}
-
+	//Método que salva objeto da classe instanciado
 	public function save(){
 		$banco = new Database();
 		$consulta = $banco->db->prepare("INSERT INTO portal (nm_portal, site, email) VALUES (?, ?, ?)");
@@ -34,8 +36,8 @@ class Portal{
 
 		return $resultado = $consulta->fetch();
 
-		}
-
+	}
+	//Método que carrega ojeto da classe a partir do seu id no banco
 	public function get($id){
 		$banco = new Database();
 		$consulta = $banco->db->prepare("SELECT * FROM portal WHERE id_portal=?");
@@ -47,7 +49,7 @@ class Portal{
 		$this->site = $resultado['site'];
 		$this->email = $resultado['email'];	
 	}
-
+	//Método que atualiza objeto instanciado da classe no banco
 	public function update(){
 		$banco = new Database();
 		$consulta = $banco->db->prepare("UPDATE portal SET nm_portal=?, site=?, email=? WHERE id_portal=?");
@@ -57,7 +59,7 @@ class Portal{
 		
 		
 	}
-
+	//Método que exclui portal no banco a partir de seu id
 	public function delete($id){
 		$banco = new Database();
 		$consulta = $banco->db->prepare("DELETE FROM portal WHERE id_portal=?");
@@ -65,7 +67,7 @@ class Portal{
 
 		return true;		
 	}
-
+	//Método estático que retorna nome do portal a partir de seu id no banco
 	public static function getName($id){
 		$banco = new Database();
 		$consulta = $banco->db->prepare("SELECT nm_portal FROM portal WHERE id_portal=?");

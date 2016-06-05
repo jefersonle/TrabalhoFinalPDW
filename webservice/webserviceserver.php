@@ -1,40 +1,43 @@
 <?php
-// Observacoes:
-// Adicionar a extensao php_soap no php.ini
+//Inclui classes noticia e portal
 include '../classes/noticia.class.php';
 include '../classes/portal.class.php';
 
-//criacao de uma instancia do servidor (coloque o endereco na sua maquina local)
-$server = new SoapServer(null, array('uri' => 'http://localhost/PDW/webservice/'));  // ex.: http://localhost/soap/
+//criacao de uma instancia do servidor
+$server = new SoapServer(null, array('uri' => 'http://localhost/PDW/webservice/'));
 
 
 
-//definicao dos métodos disponíveis para uso do servico ( vai retornar apenas a frase Hello World + parametro que receber + ! )
-
+//definicao dos métodos disponíveis para uso do servico 
+			//Método para busca de notícia com palavra chave
 	  		function getSearch($palavraChave){
 	  			$noticia = new Noticia();
 	  			$noticias = $noticia->search($palavraChave);
 
 	  			return $noticias;
 	  		}
+	  		//Método para pegar notícias de um determinado portal pelo seu id
 	  		function getByPortalId($id){
 	  			$noticia = new Noticia();
 	  			$resultado = $noticia->getByPortalId($id);
 	  			
 	  			return $resultado;
 	  		}
+	  		//Método que retorna notícia especificada pelo seu id
 	  		function getByNoticiaId($id){
 	  			$noticia = new Noticia();
 	  			$resultado = $noticia->getById($id);
 
 	  			return $resultado;
 	  		}
+	  		//Método para pegar todas as notícias
 	  		function getAllNoticias(){
 	  			$noticia = new Noticia();
 	  			$noticias = $noticia->getAll();
 
 	  			return $noticias;
 	  		}
+	  		//Método para pegar todos os Portais
 	  		function getAllPortais(){
 	  			$portal = new Portal();
 	  			$portais = $portal->getAll();
@@ -43,7 +46,7 @@ $server = new SoapServer(null, array('uri' => 'http://localhost/PDW/webservice/'
 
 	  		
 
-//registro do servico na instania
+//Registro dos métodos do servico na instancia
 $server->addFunction("getSearch");
 $server->addFunction("getByPortalId");
 $server->addFunction("getByNoticiaId");

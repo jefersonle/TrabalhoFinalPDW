@@ -1,28 +1,35 @@
 <?php
+//Inclui arquivos necessários
 include '../inc/config.php'; // inclusao das configuracoes
 include '../inc/head.pages.inc.php'; // inclusao do css e js
 include "../classes/portal.class.php";
-
+//Instancia novo objeto portal
 $portal = new Portal();
+//Cria array de portais
 $portais = $portal->getAll();
-
+//Verifica se a requisição foi feita via post
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    //Salva informações recebidas via post em variáveis
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $site = $_POST['site'];
+    //Verifica se os campos não estão vazios
     if($nome != "" && $email != "" && $site != ""){
-        
+        //Adiciona informações aos atributos do objeto portal
         $portal->nmPortal = $nome;
         $portal->site = $site;
         $portal->email = $email;
+        //Salva objeto portal no banco
         $portal->save();
-
+        //Popula msg
         $msg = "Cadastro efetuado com sucesso";
 
     }else{
+        //Popula msg caso algum campo estiver em branco
         $msg = "Erro, todos os campos são obrigatórios";
     }
 }else{
+    //Inicia msg
     $msg = "";
 }
 
@@ -80,6 +87,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <th>Email</th>
                                 <th>Opções</th>
                             </tr>
+                            <!-- Percorre array de portais e popula tabela -->
                             <?php foreach($portais as $portal):?>
                             <tr class="last_row">                                
                                 <td><?=$portal['nm_portal']?></td>
@@ -95,6 +103,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     </div>
                 </div>
             </div>
+            <!-- Inclui rodapé -->
            <?php include '../inc/footer.pages.inc.php'; ?>
         </div>
     </body>

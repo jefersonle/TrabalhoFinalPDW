@@ -1,42 +1,54 @@
 <?php
+
+//Inclui arquivos necessários
 include '../inc/config.php'; // inclusao das configuracoes
 include '../inc/head.pages.inc.php'; // inclusao do css e js
 include "../classes/noticia.class.php";
 include "../classes/portal.class.php";
 include "../classes/imagem.class.php";
 
+//Instancia objeto portal
 $portal = new Portal();
+//Cria array com todos os portais
 $portais = $portal->getAll();
 
+//Instacia objeto notícia
 $noticia = new Noticia();
+//Cria array com todas as notícias
 $noticias = $noticia->getAll();
 
+//Verifica se a requisição foi feita via post
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    //Cria variáveis com as informações recebidas via post
     $id_portal = $_POST['portal'];
     $titulo = $_POST['titulo'];
     $conteudo = $_POST['conteudo'];
     $data = $_POST['data'];
     $link = $_POST['link'];
-    
+    //Verifica se os campos não estão vazios
     if($id_portal !="" && $titulo !="" && $conteudo !="" && $data !="" && $link !=""){
+        //Atribui atributos ao objeto
         $noticia->idPortal = $id_portal;
         $noticia->titulo = $titulo;
         $noticia->data = $data;
         $noticia->conteudo = $conteudo;
         $noticia->link = $link;
-        $noticia->gravata = substr($conteudo, 0, 50);
-
+        //Gera gravata a partir do conteúdo
+        $noticia->gravata = substr($conteudo, 0, 200);
+        //Salva notícia no banco
         $res = $noticia->save();
 
-
+        //Faz upload da imagem para a pasta imgnoticias com o nome sendo o id da notícia
         move_uploaded_file($_FILES['imagem']['tmp_name'], "../imgnoticias/".$res.".jpg");
-
+        //Altera msg
         $msg = "Cadastro efetuado com sucesso";
 
     }else{
+        //Se algum campo estiver em branco altera a msg
         $msg = "Erro, todos os campos são obrigatórios";
     }
 }else{
+    //Inicia msg
     $msg = "";
 }
 
@@ -57,6 +69,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                         <div class="form-group">
                                             <label for="sel1">Portal:</label>
                                             <select name="portal" class="form-control" id="sel1">
+                                                <!-- Percorre array de portais para criar um select -->
                                                 <?php foreach($portais as $portal): ?>
                                                 <option value="<?=$portal['id_portal']?>"><?=$portal['nm_portal']?></option>
                                             <?php endforeach; ?>
@@ -111,6 +124,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <th>Link</th>
                                 <th>Opções</th>
                             </tr>
+                            <!-- Percorre array de notícias para exibir na tabela -->
                             <?php foreach ($noticias as $noticia): ?>
                             <tr class="last_row">
                                 <td><?php echo Portal::getName($noticia['id_portal']) ?></td>
@@ -130,6 +144,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     </div>
                 </div>
             </div>
+            <!-- Inclui Rodapé -->
            <?php include '../inc/footer.pages.inc.php'; ?>
         </div>
     </body>

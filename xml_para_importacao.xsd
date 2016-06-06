@@ -1,0 +1,12 @@
+<xs:schemaxmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:sequence>
+		<xs:elementname="noticias" type="Tnoticia"/>
+			<xs:complexType>
+				<xs:element name="idPortal" type="xs:integer"/>
+				<xs:element name="titulo" type="xs:string"/>
+				<xs:element name="data" type="xs:date"/>
+				<xs:element name="conteudo" type="xs:string"/>
+				<xs:element name="link" type="xs:string"/>
+			</xs:complexType>
+		</xs:sequence>
+	</xs:schemaxmlns:xs>

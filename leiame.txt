@@ -1,0 +1,17 @@
+
+INSTALANDO O SISTEMA:
+
+
+1º O Sistema deve ser colocado em uma pasta chamada PDW na raiz do seu servidor Web
+2º Deve-se Criar um BD do Tipo Postgres com as seguintes configurações:
+	- database = pdw
+	- user = postgres
+	- password = 123
+
+
+ACESSANDO O SISTEMA: 
+
+Para acessar o sistema deve-se digitar o endereço do seu servidor web (127.0.0.1 caso esteja usando localmente)
+e após isso acessar a pasta PDW anteriormente criada
+
+EX: 127.0.0.1/PDW
